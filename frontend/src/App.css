@@ -1,0 +1,18 @@
+:root {
+  --color-primary: #7A1F1F;
+  --color-secondary: #F4EDE4;
+  --color-accent: #E43B3B;
+  --color-neutral-dark: #333333;
+  
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+  
+  --radius-small: 4px;
+  --radius-medium: 8px;
+  --radius-large: 16px;
+  --radius-pill: 40px;
+}
