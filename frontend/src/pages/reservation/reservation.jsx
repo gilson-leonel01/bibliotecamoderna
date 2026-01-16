@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { BookOpen, Calendar, Hash, Package, XCircle } from 'lucide-react';
 
 export default function Reservation() {
-  const [livros, setLivros] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [livros, setLivros] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -46,11 +46,16 @@ export default function Reservation() {
           <div className="flex items-center justify-center w-16 h-16 mx-auto bg-red-100 rounded-full">
             <XCircle className="w-8 h-8 text-red-600" />
           </div>
-          <h2 className="mt-4 text-xl font-semibold text-center text-gray-800">Erro ao carregar</h2>
+
+          <h2 className="mt-4 text-xl font-semibold text-center text-gray-800">
+            Erro ao carregar
+          </h2>
+
           <p className="mt-2 text-center text-gray-600">{error}</p>
+
           <button
             onClick={fetchLivros}
-            className="mt-6 w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors"
+            className="mt-6 w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 hover:cursor-pointer transition-colors"
           >
             Tentar novamente
           </button>
@@ -119,17 +124,18 @@ export default function Reservation() {
                 <div className="pt-4 border-t border-gray-200">
                   <div className="flex items-center justify-between text-xs text-gray-500">
                     <span>Criado em</span>
-                    <span>{new Date(livro.createdAt).toLocaleDateString('pt-BR')}</span>
+                    <span>{new Date(livro.createdAt).toLocaleDateString('pt-PT')}</span>
                   </div>
+
                   <div className="flex items-center justify-between text-xs text-gray-500 mt-1">
                     <span>Atualizado em</span>
-                    <span>{new Date(livro.updatedAt).toLocaleDateString('pt-BR')}</span>
+                    <span>{new Date(livro.updatedAt).toLocaleDateString('pt-PT')}</span>
                   </div>
                 </div>
 
                 <button
                   disabled={!livro.estaDisponivel}
-                  className={`w-full py-3 px-4 rounded-lg font-semibold transition-colors ${
+                  className={`w-full py-3 px-4 rounded-lg font-semibold hover:cursor-pointer transition-colors ${
                     livro.estaDisponivel
                       ? 'bg-indigo-600 text-white hover:bg-indigo-700'
                       : 'bg-gray-300 text-gray-500 cursor-not-allowed'

@@ -1,9 +1,7 @@
 export default function NotFound() {
     return(
-        <div className="min-h-screen flex flex-col items-center justify-center bg-white">
-            <h1 className="text-6xl font-bold text-gray-800 mb-4">HTTP ERROR - 404</h1>
-            <p className="text-xl text-gray-600 mb-8">Página não encontrada</p>
-            <a href="/" className="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Voltar ao início</a>
+        <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+           <h1 className="text-4xl font-bold text-gray-900">404 - Página Não Encontrada</h1>
         </div>
     )
 }

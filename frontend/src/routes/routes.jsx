@@ -4,19 +4,19 @@ import {
   BrowserRouter as Router,
 } from "react-router-dom";
 
-import Home from "../pages/home/home";
-import Login from "../pages/login/login";
+import Login from "../pages/loginPage/loginPage";
 import NotFound from "../pages/notfound/notfound";
+import Dashboard from "../pages/dashboard/dashboard";
 import Reservation from "../pages/reservation/reservation";
 
 export default function Routers() {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/entrar" element={<Login />} /> 
-                <Route path="/reservation" element={<Reservation />} /> 
+                <Route path="/" element={<Login />} />
                 <Route path="*" element={<NotFound />} />
+                <Route path="/dashboard" element={<Dashboard />} /> 
+                <Route path="/reservation" element={<Reservation />} /> 
             </Routes>
         </Router>
     );
