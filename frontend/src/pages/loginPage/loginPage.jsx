@@ -1,5 +1,7 @@
+import { z } from 'zod';
 import { useState } from 'react';
 import logo from '../../assets/logo.webp';
+import { useNavigate } from 'react-router-dom';
 import { Lock, Mail, Eye, EyeOff } from 'lucide-react';
 
 export default function LoginPage() {
@@ -8,10 +10,33 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const navigate = useNavigate();
+
+  const loginSchema = z.object({
+    email: z
+      .string()
+      .email('Email inválido'),
+    password: z
+      .string()
+      .min(6, 'A senha deve ter pelo menos 6 caracteres'),
+    rememberMe: z.boolean(),
+  });
 
   const handleSubmit = () => {
-    console.log('Login:', { email, password, rememberMe });
+    const data = { email, password, rememberMe };
+
+    const result = loginSchema.safeParse(data);
+
+    if (!result.success) {
+      console.error('Erro de validação:', result.error.format());
+      return;
+    }
+
+    console.log('Login válido:', result.data);
+
+    navigate('/reservation');
   };
+
 
   return (
     <div className="min-h-screen bg-linear-to-br from-purple-600 via-purple-700 to-purple-900 flex items-center justify-center p-4">

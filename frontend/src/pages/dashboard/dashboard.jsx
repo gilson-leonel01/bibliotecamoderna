@@ -13,6 +13,23 @@ const mockUser = {
   emprestimosAtivos: 2
 };
 
+const multas = [
+  {
+    livro: "1984",
+    diasAtraso: 2,
+    valor: 200,
+    dataDevolucao: "11/01/2026",
+  },
+  {
+    livro: "A Liberdade",
+    diasAtraso: 10,
+    valor: 1000,
+    dataDevolucao: "19/01/2026",
+  },
+];
+
+const total = multas.reduce((acc, multa) => acc + multa.valor, 0);
+
 export default function Dashboard() {
   const [currentPage, setCurrentPage] = useState('dashboard');
   const [livros, setLivros] = useState([]);
@@ -315,17 +332,20 @@ export default function Dashboard() {
           <h3 className="text-xl font-semibold">Multas Pendentes</h3>
           <div className="text-right">
             <p className="text-sm text-gray-600">Total a Pagar</p>
-            <p className="text-3xl font-bold text-red-600">200 Kz</p>
+            <p className="text-3xl font-bold text-green-600">{total} Kz</p>
           </div>
         </div>
 
         <div className="space-y-4">
-          <MultaCard 
-            livro="1984"
-            diasAtraso={2}
-            valor={200}
-            dataDevolucao="11/01/2026"
-          />
+          {multas.map((multa, index) => (
+            <MultaCard
+              key={index}
+              livro={multa.livro}
+              diasAtraso={multa.diasAtraso}
+              valor={multa.valor}
+              dataDevolucao={multa.dataDevolucao}
+            />
+          ))}
         </div>
 
         <button className="w-full mt-6 bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors">
@@ -480,7 +500,7 @@ const EmprestimoRow = ({ livro, dataEmprestimo, dataDevolucao, status, diasResta
       </span>
     </td>
     <td className="p-4">
-      <button className="text-indigo-600 hover:text-indigo-700 font-medium">Renovar</button>
+      <button className="text-indigo-600 font-medium p-2 rounded-2xl hover:text-indigo-700 hover:border-2 hover:cursor-pointer">Renovar</button>
     </td>
   </tr>
 );

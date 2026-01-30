@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { User, Mail, Lock, Bell, BookOpen, Heart, Globe, Save, LogOut, Camera } from 'lucide-react';
-import { useNavigate } from 'react-router-dom'; // se estiver usando react-router
+import { useState } from 'react';
+import avatar from '../../assets/avatar.svg'
+import { useNavigate } from 'react-router-dom'; 
+import { User, Mail, Lock, Bell, Heart, Globe, Save, LogOut, Camera } from 'lucide-react';
 
 export default function SettingsPage() {
   const navigate = useNavigate();
   
-  // Estados para formulário (valores mock/exemplo)
   const [profile, setProfile] = useState({
     name: 'João Silva',
     email: 'joao.silva@email.com',
-    avatar: '', // pode ser URL ou base64
+    avatar: `${avatar}`, 
     preferredGenres: ['Ficção Científica', 'Romance', 'Clássicos'],
-    preferredFormat: 'Físico', // ou 'Digital', 'Audiobook'
+    preferredFormat: 'Físico', 
     notifications: true,
     language: 'Português',
     rememberMe: true,
@@ -35,7 +35,6 @@ export default function SettingsPage() {
 
   const handleSaveProfile = () => {
     console.log('Salvando perfil:', profile);
-    // Aqui: chamada API para atualizar perfil
     alert('Perfil atualizado com sucesso!');
   };
 
@@ -45,39 +44,35 @@ export default function SettingsPage() {
       return;
     }
     console.log('Alterando senha...');
-    // Aqui: chamada API para trocar senha
     alert('Senha alterada com sucesso!');
   };
 
   const handleLogout = () => {
-    // Limpar auth, redirecionar para login
-    navigate('/login');
+    navigate('/');
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-purple-700 to-purple-900 text-white p-6">
+    <div className="min-h-screen bg-linear-to-br from-purple-600 via-purple-700 to-purple-900 text-white p-6">
       <div className="max-w-4xl mx-auto">
-        {/* Header da página */}
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold flex items-center gap-3">
             <User className="w-8 h-8" /> Configurações da Conta
           </h1>
+          
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2 bg-red-600/80 hover:bg-red-700 px-4 py-2 rounded-lg transition"
+            className="flex items-center gap-2 bg-red-600/80 hover:bg-red-700 px-4 py-2 rounded-lg hover:cursor-pointer transition"
           >
             <LogOut className="w-5 h-5" /> Sair
           </button>
         </div>
 
-        {/* Card Principal - Perfil */}
         <div className="bg-purple-800/40 backdrop-blur-sm rounded-2xl p-8 mb-8 border border-purple-600/30 shadow-xl">
           <h2 className="text-2xl font-semibold mb-6 flex items-center gap-3">
-            <Camera className="w-6 h-6" /> Foto e Informações Pessoais
+            Informações Pessoais
           </h2>
 
           <div className="flex flex-col md:flex-row gap-8 items-start">
-            {/* Avatar */}
             <div className="flex flex-col items-center">
               <div className="w-32 h-32 rounded-full bg-purple-700 flex items-center justify-center overflow-hidden border-4 border-purple-500">
                 {profile.avatar ? (
@@ -86,12 +81,12 @@ export default function SettingsPage() {
                   <User className="w-16 h-16 text-purple-300" />
                 )}
               </div>
-              <button className="mt-3 text-sm text-purple-300 hover:text-purple-200 flex items-center gap-1">
+
+              <button className="mt-3 text-sm text-purple-300 hover:text-purple-200 hover:cursor-pointer flex items-center gap-1">
                 <Camera className="w-4 h-4" /> Alterar foto
               </button>
             </div>
 
-            {/* Campos */}
             <div className="flex-1 space-y-5">
               <div>
                 <label className="block text-sm font-medium mb-2">Nome completo</label>
@@ -121,7 +116,6 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        {/* Preferências de Leitura */}
         <div className="bg-purple-800/40 backdrop-blur-sm rounded-2xl p-8 mb-8 border border-purple-600/30 shadow-xl">
           <h2 className="text-2xl font-semibold mb-6 flex items-center gap-3">
             <Heart className="w-6 h-6" /> Preferências de Leitura
@@ -129,7 +123,10 @@ export default function SettingsPage() {
 
           <div className="space-y-6">
             <div>
-              <label className="block text-sm font-medium mb-2">Gêneros favoritos (selecione múltiplos)</label>
+              <label className="block text-sm font-medium mb-2">
+                Gêneros favoritos (selecione múltiplos)
+              </label>
+
               <div className="flex flex-wrap gap-3">
                 {['Ficção Científica', 'Fantasia', 'Romance', 'Clássicos', 'Mistério', 'Autoajuda', 'Biografias'].map(genre => (
                   <button
@@ -170,7 +167,6 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        {/* Notificações e Outras Configs */}
         <div className="bg-purple-800/40 backdrop-blur-sm rounded-2xl p-8 mb-8 border border-purple-600/30 shadow-xl">
           <h2 className="text-2xl font-semibold mb-6 flex items-center gap-3">
             <Bell className="w-6 h-6" /> Notificações e Preferências
@@ -188,7 +184,7 @@ export default function SettingsPage() {
             </label>
 
             <div>
-              <label className="block text-sm font-medium mb-2 flex items-center gap-2">
+              <label className="text-sm font-medium mb-2 flex items-center gap-2">
                 <Globe className="w-5 h-5" /> Idioma da interface
               </label>
               <select
@@ -205,7 +201,6 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        {/* Alterar Senha */}
         <div className="bg-purple-800/40 backdrop-blur-sm rounded-2xl p-8 mb-8 border border-purple-600/30 shadow-xl">
           <h2 className="text-2xl font-semibold mb-6 flex items-center gap-3">
             <Lock className="w-6 h-6" /> Alterar Senha
@@ -222,6 +217,7 @@ export default function SettingsPage() {
                 className="w-full bg-purple-900/50 border border-purple-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-400"
               />
             </div>
+
             <div>
               <label className="block text-sm font-medium mb-2">Nova senha</label>
               <input
@@ -232,6 +228,7 @@ export default function SettingsPage() {
                 className="w-full bg-purple-900/50 border border-purple-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-400"
               />
             </div>
+
             <div>
               <label className="block text-sm font-medium mb-2">Confirmar nova senha</label>
               <input
@@ -245,18 +242,17 @@ export default function SettingsPage() {
 
             <button
               onClick={handleChangePassword}
-              className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition shadow-lg"
+              className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition hover:cursor-pointer shadow-lg"
             >
               Alterar Senha
             </button>
           </div>
         </div>
 
-        {/* Botão Salvar Geral */}
         <div className="flex justify-end">
           <button
             onClick={handleSaveProfile}
-            className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg transition shadow-xl"
+            className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg transition hover:cursor-pointer shadow-xl"
           >
             <Save className="w-5 h-5" /> Salvar Alterações
           </button>
